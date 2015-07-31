@@ -14,5 +14,5 @@ exports.answer = function(req, res) {
 
 // GET /author
 exports.author = function(req, res){
-	res.render('author', {author:'@farkbarn'});
+	res.render('author', {author:'@farkbarn', foto:'/images/foto.jpg'});
 }
