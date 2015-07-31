@@ -1,11 +1,11 @@
 {
   "name": "quiz",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
   },
-  "engines: {
+  "engines": {
 	"node":"0.10.40",
 	"npm": "1.4.28"
 },
