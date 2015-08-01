@@ -1,5 +1,4 @@
 var path = require('path');
-
 //Postgres: postgres://user:passwd@host:port/database
 //SQLite: sqlite://:@:/
 var url = process.env.DATABASE_URL.match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/);
@@ -36,6 +35,7 @@ var sequelize = new Sequelize (DB_name, user, pwd,
 
 // mantener de la versión anterior
 var Quiz = sequelize.import(path.join(__dirname,'quiz'));
+
 
 exports.Quiz = Quiz; //exportando definición de tabla quiz
 
