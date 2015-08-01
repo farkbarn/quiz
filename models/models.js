@@ -1,6 +1,7 @@
 var path = require('path');
 //Postgres: postgres://user:passwd@host:port/database
 //SQLite: sqlite://:@:/
+
 var url = process.env.DATABASE_URL.match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/);
 var DB_name = (url[6]||null);
 var user    = (url[2]||null);
@@ -30,12 +31,19 @@ var sequelize = new Sequelize (DB_name, user, pwd,
 //);
 
 // Import definición de la tabla Quiz en quiz.js
+<<<<<<< HEAD
 //var quiz_path = path.join(__dirname,'quiz');
 //var Quiz = sequelize.import(quiz_path);
 
 // mantener de la versión anterior
 var Quiz = sequelize.import(path.join(__dirname,'quiz'));
+=======
+var quiz_path = path.join(__dirname,'quiz');
+var Quiz = sequelize.import(quiz_path);
+>>>>>>> b5f66eaeb4bd5a38e3ed9d8f55d96f1bc3d308a8
 
+// mantener de la versión anterior
+//var Quiz = sequelize.import(path.join(__dirname,'quiz'));
 
 exports.Quiz = Quiz; //exportando definición de tabla quiz
 
