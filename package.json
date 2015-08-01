@@ -1,4 +1,3 @@
-
 {
   "name": "quiz",
   "version": "0.0.1",
@@ -21,5 +20,20 @@
     "sequelize": "^1.7.0",
     "serve-favicon": "~2.1.3",
     "sqlite3": "^3.0.9"
-  }
+  },
+  "description": "Proyecto Quiz",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/farkbarn/quiz.git"
+  },
+  "keywords": [
+    "Quiz"
+  ],
+  "author": "Frank Barrera - farkbarn",
+  "license": "GPL v2",
+  "bugs": {
+    "url": "https://github.com/farkbarn/quiz/issues"
+  },
+  "homepage": "https://github.com/farkbarn/quiz"
 }
