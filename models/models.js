@@ -7,8 +7,8 @@ var dir = 'postgres://reyyzwfkqqeuhp:qacWJPWcJHHAsh_P_BsR3G_xCT@ec2-54-83-10-210
 
 //var url = process.env.DATABASE_URL.match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/);
 //var url = process.env.DATABASE_URL.match((.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/);
-
-var url = process.env.DATABASE_URL.match(dir);
+//var url = process.env.DATABASE_URL.match(dir);
+var url = dir.match((.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/);
 
 var DB_name = (url[6]||null);
 var user    = (url[2]||null);
