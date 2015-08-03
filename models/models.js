@@ -5,17 +5,18 @@ var path = require('path');
 //var DATABASE_URL = 'postgres://reyyzwfkqqeuhp:qacWJPWcJHHAsh_P_BsR3G_xCT@ec2-54-83-10-210.compute-1.amazonaws.com:5432/d2qbmejr0esq4p';
 
 var url = process.env.DATABASE_URL.match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/);
+
 //var url = process.env.DATABASE_URL.match((.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/);
 //var url = process.env.DATABASE_URL.match(dir);
 //var url = process.env.DATABASE_URL.match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/);
 
-var DB_name = (url[6]||null);
-var user    = (url[2]||null);
-var pwd     = (url[3]||null);
-var protocol= (url[1]||null);
-var dialect = (url[1]||null);
-var port    = (url[5]||null);
-var host    = (url[4]||null);
+var DB_name = (url[5]||null);
+var user    = (url[1]||null);
+var pwd     = (url[2]||null);
+var protocol= (url[0]||null);
+var dialect = (url[0]||null);
+var port    = (url[4]||null);
+var host    = (url[3]||null);
 var storage = process.env.DATABASE_STORAGE;
 
 //.success(function(){console.log(url[6])});
