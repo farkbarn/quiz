@@ -10,13 +10,28 @@ var url = process.env.DATABASE_URL.match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)
 //var url = process.env.DATABASE_URL.match(dir);
 //var url = process.env.DATABASE_URL.match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/);
 
-var DB_name = (url[5]||null);
-var user    = (url[1]||null);
-var pwd     = (url[2]||null);
-var protocol= (url[0]||null);
-var dialect = (url[0]||null);
-var port    = (url[4]||null);
-var host    = (url[3]||null);
+
+tipo,user,pass,host,puerto,db
+postgres
+:
+//
+ncikxqbimskipr
+:
+4OfkxvJIR3t4hu67nrhCpzkAVb
+@
+ec2-54-83-10-210.compute-1.amazonaws.com
+:
+5432
+/
+d6eekqli3k37pg
+
+var DB_name = (url[6]||null);
+var user    = (url[2]||null);
+var pwd     = (url[3]||null);
+var protocol= (url[1]||null);
+var dialect = (url[1]||null);
+var port    = (url[5]||null);
+var host    = (url[4]||null);
 var storage = process.env.DATABASE_STORAGE;
 
 //.success(function(){console.log(url[6])});
