@@ -1,20 +1,37 @@
-<%if (quiz.image){%>
-<p><img class="quiz_img" src="/media/<%= quiz.image %>"></p>
-<%}%>
-<form method="get" action="/quizes/<%= quiz.id %>/answer">        
-  <%= quiz.pregunta %> <p>
-  <input type="text" name="respuesta" value="Respuesta"/>
-  <input type="submit" value="Enviar">
-</form>
+<div class="well well-info">
+	<form method="get" action="/quizes/<%= quiz.id %>/answer">        
+		
+	  <strong>Pregunta:</strong> <%= quiz.pregunta %> <br/>
+	  <strong>Tem&aacute;tica:</strong> <%= quiz.tematica %> <br/>
+	  <input type="text" name="respuesta" value="Respuesta"/>
+	  
+	  
+	  <button type="submit" class="btn btn-primary">
+		<i class="fa fa-check"></i>
+		Enviar
+	  </button>
+	</form>
 
-<p><a href="/quizes/<%= quiz.id %>/comments/new"><button>Nuevo comentario</button></a></p>
+	<br/>
+	<p>
+	<a href="/quizes/<%= quiz.id %>/comments/new" class="btn btn-primary">
+		<i class="fa fa-plus"></i>
+		Nuevo comentario
+	</a>
 
-<p><strong>Comentarios:</strong></p>
-<%for(index in quiz.Comments){%>
-	<%if(quiz.Comments[index].publicado){%>
-		<p>- <%=quiz.Comments[index].texto%></p>
-	<%} else if(session.user && (session.user.isAdmin || (session.user && quiz.UserId === session.user.id))){%>
-			<p>- <%=quiz.Comments[index].texto%>
-			<a href="/quizes/<%= quiz.id %>/comments/<%=quiz.Comments[index].id%>/publish"><button>Publicar</button></a></p>
+	<br/>
+	<h3>Comentarios:</h3>
+	<%for(index in quiz.Comments){%>
+		<%if(quiz.Comments[index].publicado || session.user){%>
+			<p>
+				<i>- <%=quiz.Comments[index].texto%></i>
+				<%if(session.user && !quiz.Comments[index].publicado){%>
+					<a href="/quizes/<%= quiz.id %>/comments/<%=quiz.Comments[index].id%>/publish" class="btn btn-primary btn-sm"><i class="fa fa-share-alt"></i> Publicar</a>
+				<%}%>
+			</p>
+		<%}%>
 	<%}%>
-<%}%>
+	<%if (quiz.Comments.length==0){%>
+	<i>No hay comentarios</i>
+	<%}%>
+</div>

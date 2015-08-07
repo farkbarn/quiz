@@ -1,31 +1,8 @@
 var models = require('../models/models.js');
 
-// MW que permite acciones solamente si el quiz al que pertenece el comentario objeto pertenece al usuario logeado o si es cuenta admin
-exports.ownershipRequired = function(req, res, next){
-    models.Quiz.find({
-            where: {
-                  id: Number(req.comment.QuizId)
-            }
-        }).then(function(quiz) {
-            if (quiz) {
-                var objQuizOwner = quiz.UserId;
-                var logUser = req.session.user.id;
-                var isAdmin = req.session.user.isAdmin;
-
-                console.log(objQuizOwner, logUser, isAdmin);
-
-                if (isAdmin || objQuizOwner === logUser) {
-                    next();
-                } else {
-                    res.redirect('/');
-                }
-            } else{next(new Error('No existe quizId=' + quizId))}
-        }
-    ).catch(function(error){next(error)});
-};
-
 // Autoload :id de comentarios
 exports.load = function(req, res, next, commentId) {
+  console.log("comment_controller.load");
   models.Comment.find({
             where: {
                 id: Number(commentId)
@@ -41,11 +18,13 @@ exports.load = function(req, res, next, commentId) {
 
 // GET /quizes/:quizId/comments/new
 exports.new = function(req, res) {
+  console.log("comment_controller.new");
   res.render('comments/new.ejs', {quizid: req.params.quizId, errors: []});
 };
 
 // POST /quizes/:quizId/comments
 exports.create = function(req, res) {
+  console.log("comment_controller.create quizId="+req.params.quizId+" texto="+req.body.comment.texto);
   var comment = models.Comment.build(
       { texto: req.body.comment.texto,          
         QuizId: req.params.quizId
@@ -56,7 +35,7 @@ exports.create = function(req, res) {
   .then(
     function(err){
       if (err) {
-        res.render('comments/new.ejs', {comment: comment, errors: err.errors});
+        res.render('comments/new.ejs', {comment: comment, errors: err.errors, quizid: req.params.quizId});
       } else {
         comment // save: guarda en DB campo texto de comment
         .save()
@@ -69,6 +48,7 @@ exports.create = function(req, res) {
 
 // GET /quizes/:quizId/comments/:commentId/publish
 exports.publish = function(req, res) {
+  console.log("comment_controller.publish");
   req.comment.publicado = true;
 
   req.comment.save( {fields: ["publicado"]})

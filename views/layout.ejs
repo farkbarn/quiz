@@ -2,55 +2,85 @@
 <html>
 <head>
   <meta charset="utf-8"><title> Preguntas </title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <link rel='stylesheet' href='/stylesheets/style.css' />
-  <link rel='stylesheet' 
-        type='text/css'
-        media='only screen and (min-width: 530px) and (min-device-width: 481px)'
-        href='/stylesheets/wide.css' />
-  <link rel='stylesheet'
-        type='text/css'
-        media='only screen and (max-width: 480px)' 
-        href='/stylesheets/smartphone.css' />
-
 </head> 
 
 <body>
-<div id="page-wrap">
-  <header class="main" id="h1">
-    <%if(!session.user){%>
-      <span class="right"><a href="/user">Sign up</a> - <a href="/login">Login</a></span>
-    <%}else{%>
-      <span class="right"> <%=session.user.username%> - <a href="/user/<%=session.user.id%>/edit">Settings</a> - <a href="/logout">Logout</a></span>
-    <%}%>
-    
-    <h2>Quiz<span>: el juego de las preguntas</span></h2>
-  </header>
 
-  <nav class="main" id="n1" role="navigation">
-    <span><a href="/">Inicio</a></span>
-    <span><a href="/quizes">Preguntas</a></span>
-    <%if(session.user){%>
-      <span><a href="/user/<%=session.user.id%>/quizes">Mis Preguntas</a></span>
-    <%}%>
-  </nav>
+<div class="container"">
 
-  <section class="main" id="s1">
-    <% if (errors.length) { %>
-      <span id='ErrorMsgs'>
-        Corregir errores:<br/>
-        <% for (var i in errors) { %>
-           <span> <%= errors[i].message %> </span><br/>
-        <% } %>
-      </span>
-    <% } %>
+	<div class="row">
+		<div class="col-xs-12">
+			<header id="h1">
+			<%if(!session.user){%>
+			  <span class="pull-right"><a href="/login">Login</a></span>
+			<%}else{%>
+			  <span class="pull-right"> <i class="fa fa-user"></i> <%=session.user.username%> <a href="/logout">Logout</a></span>
+			<%}%>
+		
+			<h2 class="text-warning">Quiz<span>: el juego de las preguntas</span></h2>
+			</header>
+		</div>
+	</div>
 
-    <div><%- body %></div>
-  </section>
+	<div class="row">
+		<div class="col-md-2 col-xs-12">
+			<ul class="nav nav-pills nav-stacked">
+				<li role="presentation">
+					<a href="/" class="label label-info">Inicio</a>
+				</li>
+				<li role="presentation">
+					<a href="/quizes" class="label label-info">Preguntas</a>
+				</li>
+				<li role="presentation">
+					<a href="/author" class="label label-info">Créditos</a>
+				</li>
+				<li role="presentation">
+					<a href="/quizes/statistics" class="label label-info">Estadísticas</a>
+				</li>
+			</ul>
+		</div>
+		
+		<div class="col-md-10 col-xs-12">
+			  <section id="s1">
+				<% if (errors.length) { %>
+				  <div class="alert alert-danger">
+					<strong>Corregir errores:</strong><br/>
+					<% for (var i in errors) { %>
+					   <span> <%= errors[i].message %> </span><br/>
+					<% } %>
+				  </div>
+				<% } %>
 
-  <footer class="main" id="f1">
-    <a href="http://es.wikipedia.org/wiki/Quiz">
-      ¿Que es un Quiz?</a>
-  </footer>
+				<div><%- body %></div>
+			  </section>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-xs-12">
+			  <footer id="f1">
+				<a href="http://es.wikipedia.org/wiki/Quiz">
+				  ¿Que es un Quiz?
+				</a>
+				&nbsp;
+				<a href="https://github.com/FernandoLopezPenalver/practica_quiz_node_js" target="_blank">
+					Practica en gibhub
+				</a>
+			  </footer>
+		</div>
+	</div>
+</div>	
+  
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </div>
 </body> 
 </html>

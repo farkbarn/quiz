@@ -18,7 +18,6 @@ app.set('view engine', 'ejs');
 
 app.use(partials());
 // uncomment after placing your favicon in /public
-// app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -32,12 +31,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Helpers dinamicos:
 app.use(function(req, res, next) {
 
-  // si no existe lo inicializa
-  if (!req.session.redir) {
-    req.session.redir = '/';
-  }
   // guardar path en session.redir para despues de login
-  if (!req.path.match(/\/login|\/logout|\/user/)) {
+  if (!req.path.match(/\/login|\/logout/)) {
     req.session.redir = req.path;
   }
 
@@ -45,6 +40,25 @@ app.use(function(req, res, next) {
   res.locals.session = req.session;
   next();
 });
+
+// Auto-logout
+app.use( function(req, res, next) {
+  if ( req.session.user ) {
+    var ahora = new Date();                           // ahora el tiempo es mayor
+    var activo = new Date( req.session.user.activo ); // momento cuando se hizo algo
+	console.log("tiempo ultimo acceso="+ ((ahora-activo)/1000));
+    if ( ( ahora-activo ) > 120000 ) {                // 120000ms = 2 minutos
+        delete req.session.user;
+        req.session.errors = [ { "message": 'Superado el tiempo de inactividad' } ];
+        res.redirect("/login");
+        return;
+    } else {
+        req.session.user.activo = new Date();
+    }
+  }
+  next();
+});
+
 
 app.use('/', routes);
 
